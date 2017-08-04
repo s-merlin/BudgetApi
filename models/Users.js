@@ -9,6 +9,7 @@ var User={
 		return db.query("select * from user where iduser=?",[id],callback);
 	},
 	addUser:function(User,callback){
+		console.log(User);
 		return db.query("Insert into user values(?,?,?,?,?)",[User.iduser,User.login,User.password,User.email,User.role],callback);
 	},
 	deleteUser:function(id,callback){

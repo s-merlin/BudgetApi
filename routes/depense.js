@@ -1,19 +1,12 @@
 var express = require('express');
 var router = express.Router();
-var User=require('../models/Users');
+var Depense=require('../models/Depenses');
 
 router.get('/:id?',function(req,res,next){
-	console.log('routeuser');
-	if (req.query.email && req.query.password){
-		console.log('routeuser1');
-		User.getUser(req.query.email,req.query.password,function(err,rows){
-			if(err) res.json(err);
-			else res.json(rows);
-		});
-	}
-	else if(req.params.id){
-		console.log('routeuser2');
-		User.getUserById(req.params.id,function(err,rows){
+	console.log('routedepense');
+	if(req.params.id){
+		console.log('routedepenseid');
+		Depense.getDepenseById(req.params.id,function(err,rows){
 			if(err)
 			{
 				res.json(err);
@@ -24,8 +17,8 @@ router.get('/:id?',function(req,res,next){
 		});
 	 }
 	 else{
-		 console.log('routeuser3');
-		User.getAllUsers(function(err,rows){
+		 console.log('routedepenseall');
+		Depense.getAllDepenses(function(err,rows){
 			if(err)
 			{
 				res.json(err);
@@ -41,7 +34,7 @@ router.get('/:id?',function(req,res,next){
 
 router.post('/',function(req,res,next){
 	console.log('postok');
-	User.addUser(req.body,function(err,count){
+	Depense.addDepense(req.body,function(err,count){
 		if(err)
 		{
 			res.json(err);
@@ -53,7 +46,7 @@ router.post('/',function(req,res,next){
 });
 
 router.delete('/:id',function(req,res,next){
-	User.deleteUser(req.params.id,function(err,count){
+	Depense.deleteDepense(req.params.id,function(err,count){
 		if(err)
 		{
 			res.json(err);
@@ -66,7 +59,7 @@ router.delete('/:id',function(req,res,next){
 });
 
 router.put('/:id',function(req,res,next){
-	User.updateUser(req.params.id,req.body,function(err,rows){
+	Depense.updateDepense(req.params.id,req.body,function(err,rows){
 		if(err)
 		{
 			res.json(err);
